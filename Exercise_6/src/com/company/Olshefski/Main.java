@@ -23,44 +23,28 @@ public class Main {
 
         while(again) {
             //Runs try function if errors are absent
+            String userString =" ";
             try {
                 System.out.println("Please enter a string value:");
-                String userString = input.nextLine();
+                userString = input.nextLine();
 
-                System.out.println("Your string value is " + userString);
-                //After user receives conformation message, again = false to exit function
-                again = false;
+                //checks to see if data type is a double (works with string)
+                Double.parseDouble(userString);
 
-                /*
-                -------------------------------------------------------------------------------
-                I was having trouble with getting a string to work while doing a parse int and
-                a parse double but the more i did the more I got confused, i commented it out so
-                the code would run... Can we go over this in class?
-                -------------------------------------------------------------------------------
-                int testInt = Integer.parseInt(userString);
-                double testDouble = Double.parseDouble(userString);
-
-                if(testInt == testDouble) {
-                    System.out.println("Im sorry but that is the incorrect data type 2");
-                    input.next();
-                }else(testInt!=testDouble);{
-                    System.out.println("Your string value is " + userString);
-                    //After user receives conformation message, again = false to exit function
-                    again = false;
-                }
-                --------------------------------------------------------------------------------
-                */
-
-            }
-            //If input is incorrect data type, catch will run
-            catch (InputMismatchException e) {
+                //Lets user know that the datatype is incorrect (should be double)
                 System.out.println("Im sorry but that is the incorrect data type");
-                //input.next used to prevent an infinite loop(needed to return to try section)
-                input.next();
+
+                //again = true makes the while loop repeat
+                again=true;
             }
             //Any other errors will result in catch
             catch (Exception e) {
-                System.out.println("Im sorry but that is the incorrect data type");
+
+                //Gives user a confirmation message
+                System.out.println("Your string value is " +userString);
+
+                //Making again = false will break the loop
+                again=false;
             }
         }
     }
