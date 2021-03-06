@@ -37,7 +37,7 @@ public class Main {
                 //again = true makes the while loop repeat
                 again=true;
             }
-            //Any other errors will result in catch
+            //Any other errors will result in catch.
             catch (Exception e) {
 
                 //Gives user a confirmation message
