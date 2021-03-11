@@ -1,7 +1,6 @@
 package com.company.Olshefski;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Main {
@@ -9,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Array List created named task list
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         Scanner input = new Scanner(System.in);
         System.out.println("Please choose an option: \n" +
@@ -17,6 +16,7 @@ public class Main {
                 "(2) Remove a task. \n" +
                 "(3) Update a task. \n" +
                 "(4) List all tasks. \n" +
+                "(5) List tasks by priority\n" +
                 "(0) Exit. \n");
 
         while (true){
@@ -47,6 +47,11 @@ public class Main {
                     displayMenu();
                     break;
 
+                case "5":
+                    listPriority(taskList);
+                    displayMenu();
+                    break;
+
                 case "0":
                     exitProgram();
                 default:
@@ -66,19 +71,30 @@ public class Main {
                 "(2) Remove a task. \n" +
                 "(3) Update a task. \n" +
                 "(4) List all tasks. \n" +
+                "(5) List tasks by priority \n" +
                 "(0) Exit. \n");
     }
 
     //For input 1 (Adds a task)
-    static ArrayList<String> addTask(ArrayList <String> taskList){
+    static ArrayList<Task> addTask(ArrayList <Task> taskList){
         Scanner input = new Scanner(System.in);
+        System.out.println("Enter the name of a task");
+        String taskName = input.nextLine();
+
         System.out.println("Please enter a description of task");
-        String userInput = input.nextLine();
-        taskList.add(userInput);
+        String taskDesc = input.nextLine();
+
+        System.out.println("Please enter a priortity (1-5)");
+        int taskpri = input.nextInt();
+        input.nextLine();
+
+        //Adds all attributes given from the "Task" class and adds it to the array list
+        taskList.add(new Task(taskName,taskDesc,taskpri));
         return taskList;
     }
+
     //For input 2 (removes a task)
-    static ArrayList<String> removeTask(ArrayList<String>taskList){
+    static ArrayList<Task> removeTask(ArrayList<Task>taskList){
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter the index of the task you want to remove");
         int userInput = input.nextInt();
@@ -88,20 +104,71 @@ public class Main {
     }
 
     //For input 3 (Updates a task)
-    static ArrayList<String> updateTask(ArrayList<String> taskList){
+    static ArrayList<Task> updateTask(ArrayList<Task>taskList){
         Scanner input = new Scanner(System.in);
+        System.out.println("Your tasks are \n" + taskList);
+
         System.out.println("Please enter an index value of task to update");
         int userInput = input.nextInt();
-        System.out.println("What would you like to change the task to?");
-        String desc = input.next();
-        taskList.set(userInput,desc);
+        input.nextLine();
+
+        System.out.println("What would you like to change the description of the task to?");
+        String newdesc = input.next();
+
+        //The userinput is put into a variable (ObjectA) to find the object in the array list
+        Task objectA = taskList.get(userInput);
+
+        //using ObjectA, the title and priority is found
+        String taskName = objectA.getName();
+        int taskpri = objectA.getPriority();
+
+        //the attributes found from objectA are added aswell as the updated description
+        taskList.add(new Task(taskName,newdesc,taskpri));
+
+        //The original object is removed from the list
+        taskList.remove(objectA);
+
         return taskList;
 
     }
 
     //for input 4 (Displays all tasks)
-    static void displayAllTasks(ArrayList<String> taskList){
+    static void displayAllTasks(ArrayList<Task> taskList){
         System.out.println(taskList);
+    }
+
+    //For input 5 (Displaying tasks with a selected priority)
+    static void listPriority(ArrayList<Task> wholeList) {
+        Scanner input = new Scanner(System.in);
+
+        boolean again = true;
+        while (again) {
+            try {
+                //Asks user for a specific priority to look for
+                System.out.println("Please enter a priority");
+                int userpri = input.nextInt();
+                //Removes bug in version of Java
+                input.nextLine();
+
+        /* Puts into a for-each ( ":" = each part) loop to find all tasks that match
+        the priority of the user input (userpri) */
+                for (Task individualTask : wholeList) {
+
+            /* If the user input is able to find a task in the array with
+            the correct priorit it will print out the task */
+                    if (userpri == individualTask.getPriority()) {
+                        System.out.println(individualTask);
+                        again = false;
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("That is the incorrect data type, please try again");
+                 input.next();
+            } catch (Exception e){
+                System.out.println("Something went wrong...");
+                input.next();
+            }
+        }
     }
 
     //for input 0 (Closes program)
