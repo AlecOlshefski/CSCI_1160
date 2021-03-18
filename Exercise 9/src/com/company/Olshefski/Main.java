@@ -33,15 +33,6 @@ class email extends contacts{
         this.email = email;
     }
 
-    //Getter and setter
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     //linking to the abstract method and making a to string
     @Override
     public void contactInfo() {
