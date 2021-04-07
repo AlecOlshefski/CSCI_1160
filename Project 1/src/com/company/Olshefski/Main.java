@@ -155,7 +155,7 @@ public class Main {
                 for (Task individualTask : wholeList) {
 
             /* If the user input is able to find a task in the array with
-            the correct priorit it will print out the task */
+            the correct priority it will print out the task */
                     if (userpri == individualTask.getPriority()) {
                         System.out.println(individualTask);
                         again = false;
