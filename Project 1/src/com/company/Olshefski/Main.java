@@ -43,7 +43,7 @@ public class Main {
                     
                 case "4":
                     System.out.println("Your Tasks recorded are...");
-                    displayAllTasks(taskList);
+                    priorityList(taskList);
                     displayMenu();
                     break;
 
@@ -58,8 +58,6 @@ public class Main {
                     System.out.println("Please insert one of the number from the menu (0-4)");
 
         }
-
-
 
     }
 
@@ -133,8 +131,28 @@ public class Main {
     }
 
     //for input 4 (Displays all tasks)
-    static void displayAllTasks(ArrayList<Task> taskList){
-        System.out.println(taskList);
+    static void priorityList(ArrayList<Task>taskList){
+        //Declares a counter to run through all available tasks
+        int i = 0;
+
+        //For loop which makes a second counter that runs through all of the available priorities (5)
+        //removes 1 from y after all priority has been listed
+        for(int y=5; y>=0; y--){
+
+            //(For every item (a) in tasklist
+            for(Task a : taskList){
+
+                //Checks for the highest priority in "a" (var on line 143)
+                if(y==a.getPriority()){
+                    //Displays the task counter (index) as well as "a" (var with the highest task pri)
+                    System.out.println("Task Index: " +i+ " " + a + "");
+
+                    //Adds to the amount of tasks counter
+                    i++;
+                }
+            }
+        }
+
     }
 
     //For input 5 (Displaying tasks with a selected priority)
