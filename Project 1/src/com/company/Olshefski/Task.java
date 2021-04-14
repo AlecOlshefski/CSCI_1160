@@ -1,9 +1,9 @@
 package com.company.Olshefski;
 
-public class Task {
+public class Task implements Comparable<Task>{
     private String name;
     private String description;
-    private int priority;
+    private Integer priority;
 
     public Task(String name, String description, int priority) {
         this.name = name;
@@ -43,5 +43,20 @@ public class Task {
                 ", priority=" + priority +
                 '}';
     }
+
+    //Used from compare to
+    @Override
+    public int compareTo(Task o) {
+
+        int compareResult = this.name.compareTo(o.name);
+        compareResult = this.priority.compareTo(o.priority);
+        // if this = "o" (other) return 0
+        // if this > "o" (other) return 1
+        // if this < "o" (other) return -1
+
+        return compareResult;
+
+    }
+
 }
 

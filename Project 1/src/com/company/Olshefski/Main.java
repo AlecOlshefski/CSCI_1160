@@ -132,27 +132,12 @@ public class Main {
 
     //for input 4 (Displays all tasks)
     static void priorityList(ArrayList<Task>taskList){
-        //Declares a counter to run through all available tasks
+        Collections.sort(taskList);
+
         int i = 0;
-
-        //For loop which makes a second counter that runs through all of the available priorities (5)
-        //removes 1 from y after all priority has been listed
-        for(int y=5; y>=0; y--){
-
-            //(For every item (a) in tasklist
-            for(Task a : taskList){
-
-                //Checks for the highest priority in "a" (var on line 143)
-                if(y==a.getPriority()){
-                    //Displays the task counter (index) as well as "a" (var with the highest task pri)
-                    System.out.println("Task Index: " +i+ " " + a + "");
-
-                    //Adds to the amount of tasks counter
-                    i++;
-                }
-            }
+        for(Task a : taskList){
+            System.out.println(a);
         }
-
     }
 
     //For input 5 (Displaying tasks with a selected priority)
