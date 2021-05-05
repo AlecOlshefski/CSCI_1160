@@ -1,5 +1,8 @@
 package com.company.Olshefski;
 
+import com.google.gson.Gson;
+
+import java.io.*;
 import java.util.*;
 
 
@@ -23,7 +26,24 @@ public class Main {
             String menuInput = input.nextLine();
 
             switch (menuInput) {
-                    case "1":
+
+                case "0":
+                    Gson gson = new Gson();
+                    ArrayList task1 = new ArrayList();
+                    task1.add(taskList);
+                    String json = gson.toJson(task1);
+
+                    try {
+                        FileWriter writer = new FileWriter("data.json");
+                        gson.toJson(taskList, writer);
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    exitProgram();
+                case "1":
                     addTask(taskList);
                     System.out.println("Task successfully added!");
                     displayMenu();
@@ -40,9 +60,19 @@ public class Main {
                     System.out.println("Task successfully updated!");
                     displayMenu();
                     break;
-                    
+
                 case "4":
                     System.out.println("Your Tasks recorded are...");
+                    Gson gson1 = new Gson();
+                    BufferedReader br = null;
+                    try {
+                        br = new BufferedReader(new FileReader("data.json"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    ArrayList<Task> task2 = gson1.fromJson(br, ArrayList.class);
+                    System.out.println(task2);
                     priorityList(taskList);
                     displayMenu();
                     break;
@@ -52,12 +82,10 @@ public class Main {
                     displayMenu();
                     break;
 
-                case "0":
-                    exitProgram();
                 default:
                     System.out.println("Please insert one of the number from the menu (0-4)");
 
-        }
+            }
 
     }
 
