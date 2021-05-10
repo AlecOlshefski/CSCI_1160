@@ -41,7 +41,7 @@ public class Main {
         try {
             strings.push("1");
             strings.push("2");
-            strings.push("Q");
+            strings.push("3");
             System.out.println(strings.pop());
             System.out.println(strings.pop());
             System.out.println(strings.pop());
